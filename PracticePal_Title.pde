@@ -43,7 +43,10 @@ void draw()
   else if (stage == 3){ //goes to about screen
     about();
   }
-  
+  else if(stage == 4)
+  {
+    highscores();
+  }
 }
 
 
@@ -96,6 +99,10 @@ void mouseClicked()
     if(overAbout())
       stage = 3;
   }
+  if(stage == 1){
+    if(overHighScores())
+    stage = 4;
+  }
   
   if(stage != 1){
     if (overBack(screenSizeX-25, screenSizeY-25, 100))
@@ -136,6 +143,23 @@ void about()
   }
   
   backButton();
+
+}
+//highscore screen
+void highscores()
+{
+  background(255);
+textAlign(LEFT);
+fill(colorOptionHead);
+stroke(colorOptionHead);
+textFont(optionHeadFont);
+text("High Scores: ", 100,100);
+
+//text for scores
+textAlign(RIGHT);
+text("Date: ",1500,100);
+
+backButton();
 
 }
 
