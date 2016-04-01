@@ -3,6 +3,7 @@
 
 int screenSizeX, screenSizeY;
 PVector position, velocity;
+PImage alto_clef, time_signature;
 
 void setup()
 {
@@ -15,6 +16,10 @@ void setup()
   position = new PVector(screenSizeX, screenSizeY/2+15);
   velocity = new PVector(-0.9, 0);
   
+  alto_clef= loadImage("alto clef.jpg");
+  alto_clef.resize(90,130);
+  time_signature = loadImage("4-4-basic-time-signature.jpg");
+  
 }
 
 void draw()
@@ -23,6 +28,8 @@ void draw()
   background(255);
   rectMode(CENTER);
   
+  image(alto_clef,100,screenSizeY*3/7);
+  image(time_signature,200,screenSizeY*3/7);
   fill(177);
   stroke(177);
   rect(400, screenSizeY/2, 5, 200);//the line?
