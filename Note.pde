@@ -1,21 +1,21 @@
-String[] data;
-  
-String pitch;
-int pitchNum;
-  
-int noteValue;
-int noteLength;
-
-class Note
+private class Note
 {
-
+  private String pitch; //letter form of note passed in
+  private int pitchNum; //note converted into a representative int
   
-  Note (String[] info) //reads in string[] from Song class containing pitch and duration info
+  private int noteValue; //int representatinon of note value. 16 = sixteenth note, 8 = eighth note, etc...
+  private int drawLength; //int representation of note length, how far away from next note in pixels note will be
+  
+  private int yPos;
+  
+  //constructor
+  Note(String[] info)
   {
-    data = info;
-    pitch = data[0];
-    noteValue = Integer.parseInt(data[1]);
+    pitch = info[0];
+    noteValue = Integer.parseInt(info[1]);
+    
   }
+  
   
   //turns letter of pitch into int representing position away from middle C (1)
   void determinePitch()
@@ -45,13 +45,29 @@ class Note
     }
   }
   
-  void determineLength()
+  //converts length of note into pixel distance
+  void determineLength() 
   {
-    noteLength = 500/noteValue;
+    drawLength = 500/noteValue;
+  }
+  
+  //returns int pitchNum
+  int getPitchNum()
+  {
+    //System.out.println(pitchNum);
+    return pitchNum;
+  }
+  
+  
+  int getLength()
+  {
+    //System.out.println(drawLength);
+    return drawLength;
   }
   
   void drawNote(float xPos, float yPos)
   {
+    
     ellipseMode(CENTER);
     
     switch(noteValue){
@@ -59,33 +75,39 @@ class Note
         strokeWeight(7);
         fill(255);
         ellipseMode(CENTER);
-        ellipse(xPos, yPos, 45, 30);
+        ellipse(xPos, yPos, 40, 25);
         break;
         
       case 2: //half note
         strokeWeight(5);
         fill(255);
         ellipseMode(CENTER);
-        ellipse(xPos, yPos, 45, 30);
-        line(xPos, yPos, xPos, yPos+30);
+        ellipse(xPos, yPos, 40, 25);
+        line(xPos+22.5, yPos, xPos+20, yPos-90);
         break;
        
       case 4: //quarter note
         strokeWeight(5);
         fill(0);
         ellipseMode(CENTER);
-        ellipse(xPos, yPos, 45, 30);
-        line(xPos, yPos, xPos, yPos+30);
+        ellipse(xPos, yPos, 40, 25);
+        line(xPos+22.5, yPos, xPos+20, yPos-90);
         break;
     }
   }
   
-  int getPitchNum(){
-    return pitchNum;
+  /*
+  //returns string pitch
+  String getPitch()
+  {
+    return pitch; 
   }
   
-  int getLengthNum()
+    
+  //returns int noteValue
+  int getNoteValue()
   {
-    return noteLength;
+    return noteValue; 
   }
+  */
 }
