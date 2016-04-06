@@ -1,3 +1,5 @@
+class Reading_In_Data {
+
 String[] data;
 String[] notes;
 void setup()
@@ -19,4 +21,5 @@ void setup()
 void draw()
 {
 
+}
 }

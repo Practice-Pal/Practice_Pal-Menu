@@ -1,3 +1,5 @@
+class serial {
+  
 import processing.serial.*;
 Serial myPort;  // Create object from Serial class
 String val;     // Data received from the serial port
@@ -20,4 +22,6 @@ void draw()
   } 
 println(val); //print it out in the console
 delay(500);
+}
+
 }

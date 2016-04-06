@@ -1,3 +1,4 @@
+class PlayMode {
 int screenSizeX, screenSizeY;
 
 PVector[] position;
@@ -29,9 +30,13 @@ public void setup()
   song.createSong();
   
   songInfo = song.getSong();
+ 
   
   position = new PVector[songInfo.length];
+  
   velocity = new PVector(-5, 0);
+  
+ //draw();
   
   totalLength = 1600;
   
@@ -84,4 +89,5 @@ public void draw()
   for(int i = 0; i < 5; i++){
     rect(screenSizeX/2, screenSizeY/2-60+30*i, screenSizeX+100, 2);
   }
+}
 }

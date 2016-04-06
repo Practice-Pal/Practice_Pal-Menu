@@ -6,6 +6,9 @@ color colorBackButton; //color of back button
 color lines; //color of music lines
 color colorOptionHead, colorOptionText; //color of option head and text
 
+Select_Music_Screen music_select;
+//Moving_Sheet_Music notesscrolling;
+PlayMode playmode;
 
 void setup()
 {
@@ -30,6 +33,10 @@ void setup()
   colorOptionText = color(70, 65, 65);
   colorBackButton = color(251);
   
+  music_select = new Select_Music_Screen();
+  //notesscrolling = new Moving_Sheet_Music();
+  playmode = new PlayMode();
+  
   stage = 1;
 }
 
@@ -43,7 +50,31 @@ void draw()
   else if (stage == 3){ //goes to about screen
     about();
   }
-  
+  else if(stage == 4)
+  {
+    highscores();
+  }
+  else if(stage == 5)
+  {
+    options();
+  }
+  else if(stage ==6)
+  {
+    play();
+  }
+  else if(stage ==7)
+  {
+    //notesscrolling.setup();
+    //notesscrolling.draw();
+    playmode.setup();
+    stage = 8;
+  }
+  else if (stage == 8)
+  {
+    playmode.draw();
+    backButton();
+  }
+    
 }
 
 
@@ -96,6 +127,22 @@ void mouseClicked()
     if(overAbout())
       stage = 3;
   }
+  if(stage == 1){
+    if(overHighScores())
+    stage = 4;
+  }
+  if(stage == 1){
+    if(overOptions())
+    stage = 5;
+  }
+  if(stage ==1){
+    if(overPlay())
+    stage = 6;
+  }
+  if(stage==6){
+    if(overSong1())
+    stage = 7;
+  }
   
   if(stage != 1){
     if (overBack(screenSizeX-25, screenSizeY-25, 100))
@@ -138,7 +185,50 @@ void about()
   backButton();
 
 }
+//highscore screen
+void highscores()
+{
+  background(255);
+textAlign(LEFT);
+fill(colorOptionHead);
+stroke(colorOptionHead);
+textFont(optionHeadFont);
+text("High Scores: ", 100,100);
 
+//text for scores
+textAlign(RIGHT);
+text("Date: ",1500,100);
+
+backButton();
+
+}
+
+void options()
+{
+  background(255);
+  textAlign(LEFT);
+  fill(colorOptionHead);
+  stroke(colorOptionHead);
+  textFont(optionHeadFont);
+  text("Options",700, 100);
+  
+  backButton();
+}
+void play()
+
+{
+  background(255);
+  textAlign(LEFT);
+  fill(colorOptionHead);
+  stroke(colorOptionHead);
+  textFont(optionHeadFont);
+  music_select.setup();
+  music_select.draw();
+  music_select.display();
+  music_select.mouseOver();
+    
+  backButton();
+}
 
 void backButton()
 {
@@ -235,6 +325,16 @@ boolean overBack(int backCenterX, int backCenterY, int radius)
 {
   double dist = sqrt(pow(mouseX-backCenterX,2) + pow(mouseY-backCenterY,2));
   if(dist < radius)
+    return true;
+  else
+    return false;
+}
+
+//true if the mouse is over the Song 1 button
+boolean overSong1()
+{
+ 
+  if(mouseX<=width-100 && mouseX>=100 && mouseY<=height/2 && mouseY>=height/4)
     return true;
   else
     return false;
