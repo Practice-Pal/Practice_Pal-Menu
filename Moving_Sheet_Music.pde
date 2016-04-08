@@ -1,5 +1,6 @@
 int screenSizeX, screenSizeY;
 PVector position, velocity;
+boolean correct, in;
 
 void setup()
 {
@@ -32,17 +33,29 @@ void draw()
   }
   
   if(position.x <= 200){
+    in = true;
     if(keyPressed){
       if (key == 'a' || key == 'A'){
-        fill(51, 222, 58);
-         stroke(51, 222, 58);
+        correct = true;
       }
       else{
-        fill(255, 8, 12);
-        stroke(255, 8, 12);
+        correct = false;
       }
-      }
+    }
   }
+  
+  if(in){
+     if(correct){
+       fill(28, 255, 0);
+       stroke(28, 255, 0);
+     }
+    else
+    {
+      fill(255, 0, 0);
+      stroke(255, 0, 0);
+    }
+  }
+ 
   strokeWeight(5);
   line(position.x+13, position.y, position.x+13, position.y-90);
   ellipseMode(CENTER);
@@ -50,6 +63,3 @@ void draw()
   position.add(velocity);
   
 }
-
-
-  
